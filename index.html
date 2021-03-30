@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+</head>
+
+
+<style>
+  #b{
+    margin-left: 0.1%;
+    color:aliceblue;
+    
+  }
+  body
+  {
+  background-image: url("bg.jpg"); 
+  background-color: #cccccc; 
+  height: 800px ;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
+
+#iframeDisplayheader{
+  /* padding: 10px; */
+  cursor: move;
+  /* z-index: 10; */
+  background-color: #2196F3;
+  color: #fff;
+}
+
+</style>
+
+<body >
+
+
+  
+<div >
+
+  <img  onclick="displayIframe('www.theonlinecalculator.com/')" src="calculator.png"  alt="calculator" style="width:50px;height:50px">
+  <br>
+  <b id="b">Calculator</b>
+
+  <br>
+  <br>
+
+  <img onclick="displayIframe('www.rapidtables.com/tools/notepad.html')" src="text-editor.png" alt="text-editor" style="width:50px;height:50px;">
+
+  <br>
+  <b id="b">Notepad</b>
+  <br>
+  <br>
+
+  <img onclick="displayIframe('www.rapidtables.com/tools/screen-recorder.html')" src="screen_recorder.png" alt="screen_recorder" style="width:50px;height:50px;">
+
+  <br>
+  <b id="b">Screen<br> Recorder</b>
+  
+
+  <div id="iframeDisplay" style="margin-left: 50%; margin-top: -10%; width:100px "></div> 
+
+  
+
+  <br>
+
+  <div id="content" ></div>
+
+  <br>
+  
+
+ 
+  <script>
+    function displayIframe(link) {
+      var l="<div id=\"iframeDisplayheader\" style=\"background-color:bisque  width:100px  \"><br><br></div><iframe style=\"border: 3px solid black; background-color: white\" src=\"https://" + link +   " \" height=\"500\" width=\"600\" ></iframe>"
+        document.getElementById("iframeDisplay").innerHTML = l;
+
+        
+
+    }
+</script>
+
+<script>
+  //Make the DIV element draggagle:
+  dragElement(document.getElementById("iframeDisplay"));
+  
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "header")) {
+      /* if present, the header is where you move the DIV from:*/
+      document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    } else {
+      /* otherwise, move the DIV from anywhere inside the DIV:*/
+      elmnt.onmousedown = dragMouseDown;
+    }
+  
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag;
+    }
+  
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // set the element's new position:
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+  
+    function closeDragElement() {
+      /* stop moving when mouse button is released:*/
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+  </script>
+
+</div>
+
+</body>
+</html>

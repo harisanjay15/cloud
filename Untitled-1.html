@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body
+  {
+  background-image: url("bg.jpg"); 
+  background-color: #cccccc; 
+  height: 800px ;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
+
+#b{
+    
+    color:aliceblue;
+    
+  }
+
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+</style>
+
+
+
+
+<script>
+    //Make the DIV element draggagle:
+    dragElement(document.getElementById("mydiv"));
+    dragElement(document.getElementById("icon"));
+    
+    function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        /* if present, the header is where you move the DIV from:*/
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+        elmnt.onmousedown = dragMouseDown;
+      }
+    
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+    
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+    
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    </script>
+
+
+
+
+
+
+
+<body>
+
+
+<div id="mydiv" style="border-top: 15px solid black"></div>
+ 
+
+
+
+<div id="icon" draggable="true" style="background-color:transparent " ><img   onclick="displayIframe('www.theonlinecalculator.com/')" src="calculator.png"  alt="calculator" style="width:50px;height:50px"></div>
+<br>
+<b id="b">Calculator</b>
+
+<br>
+<br>
+
+<div id="icon" draggable="true" style="background-color:transparent " ><img  onclick="displayIframe('www.rapidtables.com/tools/notepad.html')" src="text-editor.png" alt="text-editor" style="width:50px;height:50px;"></div>
+
+<br>
+<b id="b">Notepad</b>
+<br>
+<br>
+
+<div id="icon" draggable="true" style="background-color:transparent " ><img  onclick="displayIframe('www.rapidtables.com/tools/screen-recorder.html')" src="screen_recorder.png" alt="screen_recorder" style="width:50px;height:50px;"></div>
+
+<br>
+<b id="b">Screen<br> Recorder</b>
+
+
+<div id="iframeDisplay" style="margin-left: 50%; margin-top: -10%; width:100px   "></div> 
+
+
+
+<br>
+
+<div id="content" ></div>
+
+<br>
+
+
+<script>
+    function displayIframe(link) {
+
+
+        
+      var l="<iframe style=\"border: 3px solid black; background-color: white \" src=\"https://" + link +   " \" height=\"500\" width=\"600\" ></iframe>"
+        var t =document.getElementById("mydiv").innerHTML ;
+        document.getElementById("mydiv").innerHTML=l + t;
+
+
+        
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
